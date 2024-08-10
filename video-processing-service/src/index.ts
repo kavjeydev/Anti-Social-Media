@@ -15,7 +15,7 @@ app.post("/process-video", (req, res) => {
         res.status(400).send("Bad request, input or output file are null.")
     }
     ffmpeg(inputFilePath)
-    .outputOptions("-vf", "scale:-1:360") // convert input to 360p
+    .outputOptions("-vf", "scale=-1:360") // convert input to 360p
     .on("end", () => {
         res.status(200).send("Video processed successfully finished.");
     })
