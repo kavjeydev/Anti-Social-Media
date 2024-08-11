@@ -88,5 +88,8 @@ export function deleteProcessedVideo(fileName: string){
 }
 
 function ensureDirectoryExistance(path: string){
-
+    if (!fs.existsSync(path)) {
+        fs.mkdirSync(path, { recursive: true }); // recursive: true enables creating nested directories
+        console.log(`Directory created at ${path}`);
+      }
 }
