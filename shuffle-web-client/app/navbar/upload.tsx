@@ -5,6 +5,38 @@ import { uploadVideo } from "../firebase/functions";
 
 import styles from "./upload.module.css";
 
+// export async function getThumbnails(){
+//   // The ID of your GCS bucket
+// const bucketName = 'your-unique-bucket-name';
+
+// // The ID of your GCS file
+// const fileName = 'your-file-name';
+
+// // The path to which the file should be downloaded
+// const destFileName = '/local/path/to/file.txt';
+
+// // Imports the Google Cloud client library
+// const {Storage} = require('@google-cloud/storage');
+
+// // Creates a client
+// const storage = new Storage();
+
+// async function downloadFile() {
+// const options = {
+//   destination: destFileName,
+// };
+
+// // Downloads the file to the destination file path
+// await storage.bucket(bucketName).file(fileName).download(options);
+
+// console.log(
+//   `gs://${bucketName}/${fileName} downloaded to ${destFileName}.`
+// );
+// }
+
+//   downloadFile().catch(console.error);
+// }
+
 export default function Upload() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.item(0);

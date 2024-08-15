@@ -14,13 +14,21 @@ const rawGCSBucketName = "asm-cht-raw-videos";
 
 const videoCollectionId = "videos";
 
+
 export interface Video {
   id?: string,
   uid?: string,
   filename?: string,
   status?: "processing" | "processed",
   title?: string,
-  description?: string
+  description?: string,
+  thumbnail?: string
+}
+
+export interface Thumbnail {
+  id?: string,
+  uid?: string,
+  filename?: string,
 }
 
 export const createUser = functions.auth.user().onCreate((user) => {
@@ -68,3 +76,6 @@ export const getVideos = onCall({maxInstances: 1}, async () => {
     await firestore.collection(videoCollectionId).limit(10).get();
   return querySnapshot.docs.map((doc) => doc.data());
 });
+
+
+

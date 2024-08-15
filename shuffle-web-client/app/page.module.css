@@ -1,3 +1,30 @@
+
 .thumbnail {
-    margin: 10px;
-  }
+  border-radius: 5px;
+}
+
+.title{
+  color: white;
+  font-size: medium;
+  font-weight: 500;
+  line-height: 20px;
+
+}
+
+.pageMain{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0px;
+}
+
+.pageDiv{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 280px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+}

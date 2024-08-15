@@ -8,11 +8,13 @@ setupDirectories();
 const app = express();
 app.use(express.json());
 
+
 app.post("/process-video", async (req, res) => {
     let data;
   try {
     const message = Buffer.from(req.body.message.data, 'base64').toString('utf8');
     data = JSON.parse(message);
+    console.log(data)
     if (!data.name) {
       throw new Error('Invalid message payload received.');
     }
@@ -25,6 +27,7 @@ app.post("/process-video", async (req, res) => {
   const outputFileName = `processed-${inputFileName}`;
   const videoName = inputFileName.split('.')[0]; // video format is <video_name>.<type>
 
+  console.log("POST")
   if (!isVideoNew(videoName)){
     return res.status(400).send("Bad Request: Video already exists and is processing.")
   }
@@ -32,7 +35,9 @@ app.post("/process-video", async (req, res) => {
     setVideo(videoName, {
       id: videoName,
       uid: videoName.split('-')[0],
-      status: "processing"
+      status: "processing",
+      title: videoName.split('-').slice(1),
+      thumbnail: videoName.split('-').slice(1) + ".png",
     })
   }
 
@@ -41,7 +46,7 @@ app.post("/process-video", async (req, res) => {
 
   await setVideo(videoName, {
     status: "processed",
-    filename: outputFileName
+    filename: outputFileName,
   })
 
   try{

@@ -35,13 +35,24 @@ export function convertVideo( rawVideoName: string, processedVideoName: string){
 }
 
 export async function downloadRawVideo(rawName: string){
-    await storage.bucket(rawGCSBucketName)
-        .file(rawName)
-        .download({destination: `${localRawPath}/${rawName}`});
+    let exist = false;
+    let file = null;
+    file = await storage.bucket(rawGCSBucketName)
+        .file(rawName);
+
+
+    exist = (await file.exists())[0];
+
+    if(exist){
+        await storage.bucket(rawGCSBucketName)
+            .file(rawName)
+            .download({destination: `${localRawPath}/${rawName}`});
+    }
 
     console.log(
         `gs://${rawGCSBucketName}/${rawName} downloaded to ${localRawPath}/${rawName}`
     );
+
 }
 
 export async function uploadProcessedVideo(processedName: string){
